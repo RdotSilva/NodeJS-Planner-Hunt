@@ -19,18 +19,13 @@ async function scrape() {
   const totalResults = spanTexts[1];
   console.log(totalResults);
 
-  // Get individual job cards, should match the total search results above in length
-  let jobs = await page.evaluate(() => {
-    let data = [];
-    let elements = document.getElementsByClassName("job-cards-council");
-
-    console.log(`elements: ${elements}`);
-
-    for (var element of elements) {
-      data.push(element.getElementsByTagName("p"));
-    }
-    return data;
-  });
+  // Extract jobs from job cards
+  const jobs = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".job-cards-council")).map((job) => [
+      job.getElementsByTagName("h2")[0].innerHTML,
+      job.getElementsByTagName("p")[0].innerHTML,
+    ])
+  );
 
   console.log(jobs);
 
