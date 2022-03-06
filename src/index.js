@@ -1,5 +1,8 @@
 const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
+const fs = require("fs");
+const path = require("path");
+const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
 
 dotenv.config();
 
@@ -28,6 +31,14 @@ async function scrape() {
   );
 
   console.log(jobs);
+
+  let newDate = new Date(Date.now());
+
+  const totalResultDataToWrite = `
+    ${newDate.toDateString()} - ${newDate.toLocaleTimeString()}: ${totalResults}
+    `;
+
+  fs.appendFileSync(jobOutputPath, totalResultDataToWrite);
 
   browser.close();
 }
