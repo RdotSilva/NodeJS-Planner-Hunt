@@ -15,6 +15,15 @@ const {
 
 const twilioClient = new twilio(twilioSid, twilioToken);
 
+const formatResults = (totalResults) => {
+  let newDate = new Date(Date.now());
+  const totalResultDataToWrite = `
+    ${newDate.toDateString()} - ${newDate.toLocaleTimeString()}: ${totalResults}
+    `;
+
+  return totalResultDataToWrite;
+};
+
 async function scrape() {
   const browser = await puppeteer.launch({});
   const page = await browser.newPage();
@@ -39,13 +48,7 @@ async function scrape() {
 
   console.log(jobs);
 
-  let newDate = new Date(Date.now());
-
-  const totalResultDataToWrite = `
-    ${newDate.toDateString()} - ${newDate.toLocaleTimeString()}: ${totalResults}
-    `;
-
-  fs.appendFileSync(jobOutputPath, totalResultDataToWrite);
+  fs.appendFileSync(jobOutputPath, formatResults(totalResults));
 
   browser.close();
 }
