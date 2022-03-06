@@ -2,11 +2,18 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
+const twilio = require("twilio");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
 
 dotenv.config();
 
-const { JOB_URL: jobUrl } = process.env;
+const {
+  JOB_URL: jobUrl,
+  TWILIO_SID: twilioSid,
+  TWILIO_TOKEN: twilioToken,
+} = process.env;
+
+const twilioClient = new twilio(twilioSid, twilioToken);
 
 async function scrape() {
   const browser = await puppeteer.launch({});
