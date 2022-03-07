@@ -11,6 +11,8 @@ const {
   JOB_URL: jobUrl,
   TWILIO_SID: twilioSid,
   TWILIO_TOKEN: twilioToken,
+  TO_NUMBER: toNumber,
+  FROM_NUMBER: fromNumber,
 } = process.env;
 
 const twilioClient = new twilio(twilioSid, twilioToken);
