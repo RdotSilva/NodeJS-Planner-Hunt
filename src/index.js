@@ -17,6 +17,14 @@ const {
 
 const twilioClient = new twilio(twilioSid, twilioToken);
 
+const sendSms = (results) => {
+  twilioClient.messages.create({
+    body: formatResults(results),
+    to: toNumber,
+    from: fromNumber,
+  });
+};
+
 const formatResults = (totalResults) => {
   let newDate = new Date(Date.now());
   const totalResultDataToWrite = `
@@ -38,6 +46,7 @@ async function scrape() {
   );
 
   const totalResults = spanTexts[1];
+  sendSms(totalResults);
   console.log(totalResults);
 
   // Extract jobs from job cards
