@@ -51,10 +51,10 @@ async function scrape() {
 
   // Extract jobs from job cards
   const jobs = await page.evaluate(() =>
-    Array.from(document.querySelectorAll(".job-cards-council")).map((job) => [
-      job.getElementsByTagName("h2")[0].innerHTML,
-      job.getElementsByTagName("p")[0].innerHTML,
-    ])
+    Array.from(document.querySelectorAll(".job-cards-council")).map((job) => ({
+      title: job.getElementsByTagName("h2")[0].innerHTML,
+      area: job.getElementsByTagName("p")[0].innerHTML,
+    }))
   );
 
   console.log(jobs);
