@@ -37,7 +37,13 @@ const formatResults = (totalResults) => {
 
 const checkDbResults = (newResults) => {
   dbConnection.findOne({ _id: dbReferenceId }, function (err, doc) {
-    console.log(doc);
+    const { results, links } = doc;
+    if (results !== newResults.results) {
+      let newJobLinks = newResults.links.filter((x) => !links.includes(x));
+      console.log(newJobLinks);
+    } else {
+      console.log("No new jobs found");
+    }
   });
 };
 
