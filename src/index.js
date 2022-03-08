@@ -3,7 +3,11 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const twilio = require("twilio");
+const Datastore = require("nedb");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
+const databasePath = path.join(__dirname, "../input/jobs.json");
+
+const dbConnection = new Datastore({ filename: databasePath, autoload: true });
 
 dotenv.config();
 
@@ -46,7 +50,8 @@ async function scrape() {
   );
 
   const totalResults = spanTexts[1];
-  sendSms(totalResults);
+
+  // sendSms(totalResults);
   console.log(totalResults);
 
   // Extract jobs from job cards
@@ -63,8 +68,6 @@ async function scrape() {
       job.getElementsByTagName("a")[0].getAttribute("href")
     )
   );
-
-  console.log(jobLinks);
 
   fs.appendFileSync(jobOutputPath, formatResults(totalResults));
 
