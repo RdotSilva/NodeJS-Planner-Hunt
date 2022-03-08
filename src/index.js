@@ -6,11 +6,7 @@ const twilio = require("twilio");
 const Datastore = require("nedb");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
 const databasePath = path.join(__dirname, "../input/jobs.json");
-
-const dbConnection = new Datastore({ filename: databasePath, autoload: true });
-
 dotenv.config();
-
 const {
   JOB_URL: jobUrl,
   TWILIO_SID: twilioSid,
@@ -18,8 +14,9 @@ const {
   TO_NUMBER: toNumber,
   FROM_NUMBER: fromNumber,
 } = process.env;
-
+const dbConnection = new Datastore({ filename: databasePath, autoload: true });
 const twilioClient = new twilio(twilioSid, twilioToken);
+const dbReferenceId = "fJ0p8GfKYkEwgbSm";
 
 const sendSms = (results) => {
   twilioClient.messages.create({
@@ -38,6 +35,12 @@ const formatResults = (totalResults) => {
   return totalResultDataToWrite;
 };
 
+const checkDbResults = (newResults) => {
+  dbConnection.findOne({ _id: dbReferenceId }, function (err, doc) {
+    console.log(doc);
+  });
+};
+
 async function scrape() {
   const browser = await puppeteer.launch({});
   const page = await browser.newPage();
@@ -50,9 +53,6 @@ async function scrape() {
   );
 
   const totalResults = spanTexts[1];
-
-  // sendSms(totalResults);
-  console.log(totalResults);
 
   // Extract jobs from job cards
   const jobs = await page.evaluate(() =>
@@ -68,6 +68,13 @@ async function scrape() {
       job.getElementsByTagName("a")[0].getAttribute("href")
     )
   );
+
+  const jobResults = {
+    results: totalResults,
+    links: jobLinks,
+  };
+
+  checkDbResults(jobResults);
 
   fs.appendFileSync(jobOutputPath, formatResults(totalResults));
 
