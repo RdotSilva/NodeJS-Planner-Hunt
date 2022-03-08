@@ -10,11 +10,14 @@ Find new planner roles and send alerts when they are found
 npm install
 ```
 
+2. Create ENV file with appropriate values
+
 ## Built With
 
 - JavaScript
 - NodeJS
 - [Twilio](https://www.twilio.com/)
+- [NeDB](https://dbdb.io/db/nedb)
 - VSCode
 
 ## Screenshots
