@@ -18,14 +18,6 @@ const dbConnection = new Datastore({ filename: databasePath, autoload: true });
 const twilioClient = new twilio(twilioSid, twilioToken);
 const dbReferenceId = "fJ0p8GfKYkEwgbSm";
 
-const sendSms = (results) => {
-  twilioClient.messages.create({
-    body: formatResults(results),
-    to: toNumber,
-    from: fromNumber,
-  });
-};
-
 const formatResults = (totalResults) => {
   let newDate = new Date(Date.now());
   const totalResultDataToWrite = `
@@ -35,6 +27,18 @@ const formatResults = (totalResults) => {
   return totalResultDataToWrite;
 };
 
+const sendSms = (results) => {
+  twilioClient.messages.create({
+    body: formatResults(results),
+    to: toNumber,
+    from: fromNumber,
+  });
+};
+
+/**
+ * Check the new results against the old results in database
+ * @param {Object} newResults Results from latest job fetch
+ */
 const checkDbResults = (newResults) => {
   dbConnection.findOne({ _id: dbReferenceId }, function (err, doc) {
     const { results, links } = doc;
@@ -47,6 +51,9 @@ const checkDbResults = (newResults) => {
   });
 };
 
+/**
+ * Main function to fetch jobs
+ */
 async function scrape() {
   const browser = await puppeteer.launch({});
   const page = await browser.newPage();
@@ -57,7 +64,6 @@ async function scrape() {
   const spanTexts = await page.$$eval("span", (elements) =>
     elements.map((el) => el.innerText)
   );
-
   const totalResults = spanTexts[1];
 
   // Extract jobs from job cards
@@ -75,12 +81,12 @@ async function scrape() {
     )
   );
 
-  const jobResults = {
+  const freshJobResults = {
     results: totalResults,
     links: jobLinks,
   };
 
-  checkDbResults(jobResults);
+  checkDbResults(freshJobResults);
 
   fs.appendFileSync(jobOutputPath, formatResults(totalResults));
 
