@@ -57,7 +57,14 @@ async function scrape() {
     }))
   );
 
-  console.log(jobs);
+  // Extract jobs links
+  const jobLinks = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".job-cards-item")).map((job) =>
+      job.getElementsByTagName("a")[0].getAttribute("href")
+    )
+  );
+
+  console.log(jobLinks);
 
   fs.appendFileSync(jobOutputPath, formatResults(totalResults));
 
