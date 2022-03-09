@@ -11,9 +11,9 @@ const {
 
 const twilioClient = new twilio(twilioSid, twilioToken);
 
-export const sendSms = (results) => {
+module.exports = sendSms = (results) => {
   twilioClient.messages.create({
-    body: formatResults(results),
+    body: results,
     to: toNumber,
     from: fromNumber,
   });
