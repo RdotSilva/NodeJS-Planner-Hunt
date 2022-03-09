@@ -2,20 +2,13 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
-const twilio = require("twilio");
 const Datastore = require("nedb");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
 const databasePath = path.join(__dirname, "../input/jobs.json");
+const sendSms = require("../utils/sendSms");
 dotenv.config();
-const {
-  JOB_URL: jobUrl,
-  TWILIO_SID: twilioSid,
-  TWILIO_TOKEN: twilioToken,
-  TO_NUMBER: toNumber,
-  FROM_NUMBER: fromNumber,
-} = process.env;
+const { JOB_URL: jobUrl } = process.env;
 const dbConnection = new Datastore({ filename: databasePath, autoload: true });
-const twilioClient = new twilio(twilioSid, twilioToken);
 const dbReferenceId = "fJ0p8GfKYkEwgbSm";
 
 const formatResults = (totalResults) => {
@@ -25,14 +18,6 @@ const formatResults = (totalResults) => {
     `;
 
   return totalResultDataToWrite;
-};
-
-const sendSms = (results) => {
-  twilioClient.messages.create({
-    body: formatResults(results),
-    to: toNumber,
-    from: fromNumber,
-  });
 };
 
 /**
@@ -46,7 +31,7 @@ const checkDbResults = (newResults) => {
       let newJobLinks = newResults.links.filter((x) => !links.includes(x));
       console.log(newJobLinks);
     } else {
-      console.log("No new jobs found");
+      console.log("No new jobs");
     }
   });
 };
