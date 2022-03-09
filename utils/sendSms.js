@@ -11,9 +11,18 @@ const {
 
 const twilioClient = new twilio(twilioSid, twilioToken);
 
+const formatResults = (results) => {
+  let links = "";
+  results.forEach((result) => {
+    links += result;
+    links += " ";
+  });
+  return links;
+};
+
 module.exports = sendSms = (results) => {
   twilioClient.messages.create({
-    body: results,
+    body: formatResults(results),
     to: toNumber,
     from: fromNumber,
   });
