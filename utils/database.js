@@ -11,6 +11,13 @@ const updateJobRecord = (newResult) => {
   });
 };
 
+const findJobRecord = new Promise((resolve, reject) => {
+  dbConnection.findOne({ _id: dbReferenceId }, function (err, doc) {
+    resolve(doc);
+  });
+});
+
 module.exports = {
   updateJobRecord,
+  findJobRecord,
 };
