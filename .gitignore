@@ -157,4 +157,5 @@ dist
 .history
 .ionide
 
-# Support for Project snippet scope
+/input
+/output
