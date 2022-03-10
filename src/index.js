@@ -10,6 +10,7 @@ dotenv.config();
 const { JOB_URL: jobUrl, BASE_URL: baseUrl } = process.env;
 const dbConnection = new Datastore({ filename: databasePath, autoload: true });
 const dbReferenceId = "fJ0p8GfKYkEwgbSm";
+const { updateJobRecord, findJobRecord } = require("../utils/database");
 
 const formatResults = (totalResults) => {
   let newDate = new Date(Date.now());
@@ -24,19 +25,21 @@ const formatResults = (totalResults) => {
  * Check the new results against the old results in database
  * @param {Object} newResults Results from latest job fetch
  */
-const checkDbResults = (newResults) => {
-  dbConnection.findOne({ _id: dbReferenceId }, function (err, doc) {
-    const { results, links } = doc;
-    if (results !== newResults.results) {
-      let newJobLinks = newResults.links
-        .filter((x) => !links.includes(x))
-        .map((result) => `${baseUrl}${result}`);
-      console.log(newJobLinks);
-      // sendSms(newJobLinks);
-    } else {
-      console.log("No new jobs");
-    }
-  });
+const checkDbResults = async (newResults) => {
+  const foundJobRecord = await findJobRecord;
+
+  const { results, links } = foundJobRecord;
+  if (results !== newResults.results) {
+    let newJobLinks = newResults.links
+      .filter((x) => !links.includes(x))
+      .map((result) => `${baseUrl}${result}`);
+    console.log(newJobLinks);
+    updateJobRecord(newResults);
+    // sendSms(newJobLinks);
+  } else {
+    console.log("No new jobs");
+    console.log(newResults);
+  }
 };
 
 /**
