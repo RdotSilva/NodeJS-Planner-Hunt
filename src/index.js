@@ -3,7 +3,7 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
-const sendSms = require("../utils/sendSms");
+const { sendSms } = require("../utils/sendSms");
 dotenv.config();
 const { JOB_URL: jobUrl, BASE_URL: baseUrl } = process.env;
 const { updateJobRecord, findJobRecord } = require("../utils/database");

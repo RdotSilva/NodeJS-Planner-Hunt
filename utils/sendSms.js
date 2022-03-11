@@ -25,10 +25,19 @@ const formatResults = (results) => {
   return links;
 };
 
-module.exports = sendSms = (results) => {
+/**
+ * Send SMS message using Twilio
+ * Make sure to add your from number in the .env file
+ * @param {String} results
+ */
+const sendSms = (results) => {
   twilioClient.messages.create({
     body: formatResults(results),
     to: toNumber,
     from: fromNumber,
   });
+};
+
+module.exports = {
+  sendSms,
 };
