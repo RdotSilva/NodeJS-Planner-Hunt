@@ -2,14 +2,10 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
-const Datastore = require("nedb");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
-const databasePath = path.join(__dirname, "../input/jobs.json");
 const sendSms = require("../utils/sendSms");
 dotenv.config();
 const { JOB_URL: jobUrl, BASE_URL: baseUrl } = process.env;
-const dbConnection = new Datastore({ filename: databasePath, autoload: true });
-const dbReferenceId = "fJ0p8GfKYkEwgbSm";
 const { updateJobRecord, findJobRecord } = require("../utils/database");
 
 const formatResults = (totalResults) => {
@@ -38,7 +34,6 @@ const checkDbResults = async (newResults) => {
     // sendSms(newJobLinks);
   } else {
     console.log("No new jobs");
-    console.log(newResults);
   }
 };
 
