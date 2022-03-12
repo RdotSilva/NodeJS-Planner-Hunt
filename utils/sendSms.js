@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const twilio = require("twilio");
+const { formatResults } = require("../utils/formatResults");
 
 dotenv.config();
 const {
@@ -10,20 +11,6 @@ const {
 } = process.env;
 
 const twilioClient = new twilio(twilioSid, twilioToken);
-
-/**
- * Format results so they are easily readable in text message
- * @param {Array} results List of result links
- * @returns
- */
-const formatResults = (results) => {
-  let links = "";
-  results.forEach((result) => {
-    links += result;
-    links += " ";
-  });
-  return links;
-};
 
 /**
  * Send SMS message using Twilio
