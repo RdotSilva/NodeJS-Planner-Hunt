@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
+const colors = require("colors");
 const jobOutputPath = path.join(__dirname, "../output/jobs.txt");
 const { sendSms } = require("../utils/sendSms");
 dotenv.config();
@@ -33,7 +34,7 @@ const checkDbResults = async (newResults) => {
     updateJobRecord(newResults);
     // sendSms(newJobLinks);
   } else {
-    console.log("No new jobs");
+    console.log("No new jobs".red);
   }
 };
 
