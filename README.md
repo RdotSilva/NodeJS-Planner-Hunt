@@ -14,11 +14,11 @@ npm install
 
 ## Built With
 
-- JavaScript
-- NodeJS
+- [JavaScript](https://www.javascript.com/)
+- [NodeJS](https://nodejs.org/)
 - [Twilio](https://www.twilio.com/)
 - [NeDB](https://dbdb.io/db/nedb)
-- VSCode
+- [VSCode](https://code.visualstudio.com/)
 
 ## Screenshots
 
