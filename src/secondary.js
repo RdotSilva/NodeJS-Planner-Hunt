@@ -16,6 +16,12 @@ async function scrape() {
 
   await page.goto(jobUrl);
 
+  // Total search results are kept in a span
+  const spanTexts = await page.$$eval("span", (elements) =>
+    elements.map((el) => el.innerText)
+  );
+  const resultsRange = spanTexts[0];
+
   browser.close();
 }
 scrape();
