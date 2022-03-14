@@ -30,6 +30,9 @@ async function scrape() {
     }))
   );
 
+  console.log(`Writing jobs by county to file: ${jobOutputPath}`.green);
+  fs.appendFileSync(jobOutputPath, counties);
+
   browser.close();
 }
 scrape();
