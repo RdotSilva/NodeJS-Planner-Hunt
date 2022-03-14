@@ -22,6 +22,14 @@ async function scrape() {
   );
   const resultsRange = spanTexts[0];
 
+  // Extract the number of jobs per county
+  const counties = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".job-cards")).map((job) => ({
+      county: job.getElementsByTagName("h2")[0].innerHTML,
+      jobs: job.getElementsByTagName("p").length, // Find the total number of
+    }))
+  );
+
   browser.close();
 }
 scrape();
