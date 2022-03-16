@@ -12,6 +12,16 @@ const formatResults = (results) => {
   return links;
 };
 
+const formatResultsForFile = (totalResults) => {
+  let newDate = new Date(Date.now());
+  const totalResultDataToWrite = `
+    ${newDate.toDateString()} - ${newDate.toLocaleTimeString()}: ${totalResults}
+    `;
+
+  return totalResultDataToWrite;
+};
+
 module.exports = {
   formatResults,
+  formatResultsForFile,
 };
