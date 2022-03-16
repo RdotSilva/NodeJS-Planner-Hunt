@@ -21,6 +21,15 @@ const formatResultsForFile = (totalResults) => {
   return totalResultDataToWrite;
 };
 
+const formatCountyResultsForFile = (results) => {
+  let counties = "";
+  results.forEach((result) => {
+    counties += result;
+    counties += "----";
+  });
+  return counties;
+};
+
 module.exports = {
   formatResults,
   formatResultsForFile,
