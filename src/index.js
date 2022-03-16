@@ -8,15 +8,7 @@ const { sendSms } = require("../utils/sendSms");
 dotenv.config();
 const { JOB_URL: jobUrl, BASE_URL: baseUrl } = process.env;
 const { updateJobRecord, findJobRecord } = require("../utils/database");
-
-const formatResults = (totalResults) => {
-  let newDate = new Date(Date.now());
-  const totalResultDataToWrite = `
-    ${newDate.toDateString()} - ${newDate.toLocaleTimeString()}: ${totalResults}
-    `;
-
-  return totalResultDataToWrite;
-};
+const { formatResultsForFile } = require("../utils/formatResults");
 
 /**
  * Check the new results against the old results in database
@@ -75,7 +67,7 @@ async function scrape() {
 
   checkDbResults(freshJobResults);
 
-  fs.appendFileSync(jobOutputPath, formatResults(totalResults));
+  fs.appendFileSync(jobOutputPath, formatResultsForFile(totalResults));
 
   browser.close();
 }
