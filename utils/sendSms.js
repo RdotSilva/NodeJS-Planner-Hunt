@@ -1,6 +1,9 @@
 const dotenv = require("dotenv");
 const twilio = require("twilio");
-const { formatResults } = require("../utils/formatResults");
+const {
+  formatResults,
+  formatCountyResultsForFile,
+} = require("../utils/formatResults");
 
 dotenv.config();
 const {
@@ -25,6 +28,15 @@ const sendSms = (results) => {
   });
 };
 
+const sendSmsSecondary = (results) => {
+  twilioClient.messages.create({
+    body: formatCountyResultsForFile(results),
+    to: secondaryToNumber,
+    from: fromNumber,
+  });
+};
+
 module.exports = {
   sendSms,
+  sendSmsSecondary,
 };
