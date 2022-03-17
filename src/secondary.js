@@ -3,6 +3,7 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const colors = require("colors");
+const { sendSmsSecondary } = require("../utils/sendSms");
 const jobOutputPath = path.join(__dirname, "../output/secondary.txt");
 dotenv.config();
 const { SECONDARY_JOB_URL: jobUrl, SECONDARY_BASE_URL: baseUrl } = process.env;
@@ -29,6 +30,11 @@ async function scrape() {
       jobs: job.getElementsByTagName("p").length, // Find the total number of
     }))
   );
+
+  if (counties) {
+    console.log(`Sending jobs by county to SMS`.green);
+    sendSmsSecondary(counties);
+  }
 
   console.log(`Writing jobs by county to file: ${jobOutputPath}`.green);
   fs.appendFileSync(jobOutputPath, counties);
