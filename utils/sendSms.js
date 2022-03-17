@@ -9,7 +9,7 @@ dotenv.config();
 const {
   TWILIO_SID: twilioSid,
   TWILIO_TOKEN: twilioToken,
-  TO_NUMBER: toNumber,
+  SECONDARY_TO_NUMBER: secondaryToNumber,
   FROM_NUMBER: fromNumber,
 } = process.env;
 
@@ -28,6 +28,10 @@ const sendSms = (results) => {
   });
 };
 
+/**
+ * Send SMS to secondary number (US number)
+ * @param {String} results
+ */
 const sendSmsSecondary = (results) => {
   twilioClient.messages.create({
     body: formatCountyResultsForFile(results),
