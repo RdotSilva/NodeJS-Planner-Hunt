@@ -37,4 +37,6 @@ const formatTotal = (results) => {
 module.exports = {
   formatResults,
   formatResultsForFile,
+  formatCountyResultsForFile,
+  formatTotal,
 };
