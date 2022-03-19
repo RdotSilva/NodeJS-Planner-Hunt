@@ -30,6 +30,10 @@ const formatCountyResultsForFile = (results) => {
   return counties;
 };
 
+const formatTotal = (results) => {
+  return `Total results: ${results.length}`;
+};
+
 module.exports = {
   formatResults,
   formatResultsForFile,
