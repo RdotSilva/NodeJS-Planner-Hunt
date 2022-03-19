@@ -12,6 +12,10 @@ const formatResults = (results) => {
   return links;
 };
 
+/**
+ * Format results with current date to be used in local file
+ * @param {String} totalResults Total number of results
+ */
 const formatResultsForFile = (totalResults) => {
   let newDate = new Date(Date.now());
   const totalResultDataToWrite = `
@@ -21,6 +25,10 @@ const formatResultsForFile = (totalResults) => {
   return totalResultDataToWrite;
 };
 
+/**
+ * Format results with county
+ * @param {Array} results List of results
+ */
 const formatCountyResultsForFile = (results) => {
   let counties = "";
   results.forEach((result) => {
