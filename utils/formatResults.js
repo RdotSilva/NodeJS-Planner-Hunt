@@ -35,7 +35,7 @@ const formatCountyResultsForFile = (results) => {
     counties += result;
     counties += "----";
   });
-  return counties;
+  return `Counties: ${counties}`;
 };
 
 const formatTotal = (results) => {
