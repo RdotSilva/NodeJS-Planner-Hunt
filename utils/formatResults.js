@@ -42,6 +42,14 @@ const formatTotal = (results) => {
   return `Total results: ${results.length}`;
 };
 
+const formatPositions = (results) => {
+  let positions = "";
+  results.forEach((result) => {
+    positions += result.position;
+    positions += "=======";
+  });
+};
+
 module.exports = {
   formatResults,
   formatResultsForFile,
