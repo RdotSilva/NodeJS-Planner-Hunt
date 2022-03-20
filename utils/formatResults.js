@@ -42,6 +42,10 @@ const formatTotal = (results) => {
   return `Total results: ${results.length}`;
 };
 
+/**
+ * Format results with positions
+ * @param {Object} results List of positions
+ */
 const formatPositions = (results) => {
   let positions = "";
   results.forEach((result) => {
@@ -55,4 +59,5 @@ module.exports = {
   formatResultsForFile,
   formatCountyResultsForFile,
   formatTotal,
+  formatPositions,
 };
