@@ -22,6 +22,16 @@ Technologies/Tools
 - [NeDB](https://dbdb.io/db/nedb)
 - [VSCode](https://code.visualstudio.com/)
 
+## Testing
+
+Unit tests are included:
+
+1. Run unit tests by running
+
+```
+npm test
+```
+
 Packages
 
 - [Colors](https://www.npmjs.com/package/colors)
