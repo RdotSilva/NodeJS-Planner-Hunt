@@ -31,6 +31,18 @@ async function scrape() {
     }))
   );
 
+  // Extract the number of positions per county
+  const positions = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".job-cards")).map((job) => ({
+      positions: job.getElementsByTagName("p"),
+    }))
+  );
+
+  if (positions) {
+    console.log(`Sending positions to SMS`.green);
+    sendSmsSecondary(positions);
+  }
+
   if (counties) {
     console.log(`Sending jobs by county to SMS`.green);
     sendSmsSecondary(counties);
