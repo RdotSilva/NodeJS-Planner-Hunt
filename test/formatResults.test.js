@@ -26,6 +26,14 @@ describe("FormatResults", function () {
     });
   });
 
+  describe("#formatCountyResultsForFile()", function () {
+    it("should return a string that contains total number of counties", function () {
+      const results = ["a", "b", "c"];
+      const formatted = formatCountyResultsForFile(results);
+      assert.equal(formatted, `Counties: a b c`);
+    });
+  });
+
   describe("#formatTotal()", function () {
     it("should return a string that contains total number of results", function () {
       const results = ["a", "b", "c"];
