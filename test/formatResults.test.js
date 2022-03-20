@@ -3,6 +3,7 @@ const {
   formatResults,
   formatResultsForFile,
   formatTotal,
+  formatPositions,
 } = require("../utils/formatResults");
 
 describe("FormatResults", function () {
@@ -39,6 +40,14 @@ describe("FormatResults", function () {
       const results = ["a", "b", "c"];
       const formatted = formatTotal(results);
       assert.equal(formatted, `Total results: 3`);
+    });
+  });
+
+  describe("#formatPositions()", function () {
+    it("should return a string that contains all positions", function () {
+      const results = [{ position: "a" }, { position: "b" }, { position: "c" }];
+      const formatted = formatPositions(results);
+      assert.equal(formatted, `a b c`);
     });
   });
 });
