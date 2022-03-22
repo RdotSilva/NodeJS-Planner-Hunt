@@ -3,6 +3,7 @@ const twilio = require("twilio");
 const {
   formatResults,
   formatCountyResultsForFile,
+  formatPositions,
 } = require("../utils/formatResults");
 
 dotenv.config();
@@ -40,7 +41,20 @@ const sendSmsSecondary = (results) => {
   });
 };
 
+/**
+ * Send SMS positions data to secondary number (US number)
+ * @param {String} results
+ */
+const sendSmsSecondaryPositions = (results) => {
+  twilioClient.messages.create({
+    body: formatPositions(results),
+    to: secondaryToNumber,
+    from: fromNumber,
+  });
+};
+
 module.exports = {
   sendSms,
   sendSmsSecondary,
+  sendSmsSecondaryPositions,
 };
