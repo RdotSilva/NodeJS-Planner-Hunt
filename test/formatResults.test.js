@@ -49,5 +49,11 @@ describe("FormatResults", function () {
       const formatted = formatPositions(results);
       assert.equal(formatted, `a b c`);
     });
+
+    it("should return correct string when no positions are found", function () {
+      const results = [];
+      const formatted = formatPositions(results);
+      assert.equal(formatted, `No positions found`);
+    });
   });
 });
