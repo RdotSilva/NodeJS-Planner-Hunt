@@ -1,5 +1,8 @@
 const nodemailer = require("nodemailer");
+const fs = require("fs");
+const path = require("path");
 const dotenv = require("dotenv");
+const emailSentOutputPath = path.join(__dirname, "../output/emailSent.txt");
 
 dotenv.config();
 const { FROM_EMAIL: fromEmail, TO_EMAIL: toEmail } = process.env;
@@ -34,3 +37,5 @@ console.log("Message sent: %s", info.messageId);
 // Preview only available when sending through an Ethereal account
 console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+fs.appendFileSync(emailSentOutputPath, new Date());
