@@ -1,4 +1,8 @@
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+
+dotenv.config();
+const { FROM_EMAIL: fromEmail, TO_EMAIL: toEmail } = process.env;
 
 // TODO: Create function to send email (this will be used rather than sending SMS)
 
@@ -17,11 +21,11 @@ let transporter = nodemailer.createTransport({
 
 // send mail with defined transport object
 let info = await transporter.sendMail({
-  from: '"Fred Foo 👻" <foo@example.com>', // sender address
-  to: "bar@example.com, baz@example.com", // list of receivers
-  subject: "Hello ✔", // Subject line
-  text: "Hello world?", // plain text body
-  html: "<b>Hello world?</b>", // html body
+  from: `Test User" ${fromEmail}`, // sender address
+  to: toEmail, // list of receivers
+  subject: "Test Email", // Subject line
+  text: "This is only a test", // plain text body
+  html: "<b>Test</b>", // html body
 });
 
 console.log("Message sent: %s", info.messageId);
