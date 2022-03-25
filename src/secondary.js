@@ -38,6 +38,18 @@ async function scrape() {
     }))
   );
 
+  // Extract the total number of specialty areas
+  const specialties = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".specialties")).map((specialty) => ({
+      specialties: specialty.getElementsByTagName("h1"),
+    }))
+  );
+
+  if (specialties) {
+    console.log(`Sending specialties to SMS`.green);
+    sendSmsSecondary(specialties);
+  }
+
   if (positions) {
     console.log(`Sending positions to SMS`.green);
     sendSmsSecondary(positions);
