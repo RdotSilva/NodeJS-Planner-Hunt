@@ -8,5 +8,11 @@ describe("SendEmail", function () {
       const expected = `Message sent: testuser@test.com`;
       assert.equal(emailSent, expected);
     });
+
+    it("failure should not send email and log error to console", function () {
+      const emailSent = await sendEmail("invalid");
+      const expected = `Unable to send message to: testuser@test.com`;
+      assert.equal(emailSent, expected);
+    });
   });
 });
