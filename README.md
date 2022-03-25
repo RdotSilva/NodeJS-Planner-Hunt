@@ -35,6 +35,8 @@ npm test
 Packages
 
 - [Colors](https://www.npmjs.com/package/colors)
+- [Puppeteer](https://www.npmjs.com/package/puppeteer)
+- [Nodemailer](https://www.npmjs.com/package/nodemailer)
 
 ## Screenshots
 
