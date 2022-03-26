@@ -45,6 +45,13 @@ async function scrape() {
     }))
   );
 
+  // Extract the total number of categories
+  const categories = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".categories")).map((category) => ({
+      categories: category.getElementsByTagName("h2"),
+    }))
+  );
+
   if (specialties) {
     console.log(`Sending specialties to SMS`.green);
     sendSmsSecondary(specialties);
