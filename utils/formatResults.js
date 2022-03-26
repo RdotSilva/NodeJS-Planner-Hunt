@@ -54,6 +54,10 @@ const formatPositions = (results) => {
   });
 };
 
+/**
+ * Format results with categories
+ * @param {Object} results List of categories
+ */
 const formatCategories = (results) => {
   let categories = "";
   results.forEach((result) => {
@@ -68,4 +72,5 @@ module.exports = {
   formatCountyResultsForFile,
   formatTotal,
   formatPositions,
+  formatCategories,
 };
