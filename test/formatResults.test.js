@@ -4,6 +4,7 @@ const {
   formatResultsForFile,
   formatTotal,
   formatPositions,
+  formatCategories,
 } = require("../utils/formatResults");
 
 describe("FormatResults", function () {
@@ -54,6 +55,14 @@ describe("FormatResults", function () {
       const results = [];
       const formatted = formatPositions(results);
       assert.equal(formatted, `No positions found`);
+    });
+  });
+
+  describe("#formatCategories()", function () {
+    it("should return a string that contains all cetegories", function () {
+      const results = ["a", "b", "c"];
+      const formatted = formatCategories(results);
+      assert.equal(formatted, `Categories: a b c`);
     });
   });
 });
