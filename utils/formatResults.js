@@ -54,6 +54,14 @@ const formatPositions = (results) => {
   });
 };
 
+const formatCategories = (results) => {
+  let categories = "";
+  results.forEach((result) => {
+    categories += result.categories;
+    categories;
+  });
+};
+
 module.exports = {
   formatResults,
   formatResultsForFile,
