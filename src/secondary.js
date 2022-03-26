@@ -52,6 +52,8 @@ async function scrape() {
     }))
   );
 
+  // TODO: Refactor using switch
+
   if (specialties) {
     console.log(`Sending specialties to SMS`.green);
     sendSmsSecondary(specialties);
@@ -65,6 +67,11 @@ async function scrape() {
   if (counties) {
     console.log(`Sending jobs by county to SMS`.green);
     sendSmsSecondary(counties);
+  }
+
+  if (categories) {
+    console.log(`Sending categories to SMS`.green);
+    sendSmsSecondary(categories);
   }
 
   console.log(`Writing jobs by county to file: ${jobOutputPath}`.green);
