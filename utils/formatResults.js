@@ -66,6 +66,9 @@ const formatCategories = (results) => {
   });
 };
 
+// TODO: Refactor to handle both categories and positions
+const formatWithSeparatingLine = (results, type) => {};
+
 module.exports = {
   formatResults,
   formatResultsForFile,
