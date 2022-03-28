@@ -53,6 +53,14 @@ const sendSmsSecondaryPositions = (results) => {
   });
 };
 
+const sendSmsNoResults = () => {
+  twilioClient.messages.create({
+    body: "NO RESULTS FOUND: CHECK SCRIPT",
+    to: secondaryToNumber,
+    from: fromNumber,
+  });
+};
+
 module.exports = {
   sendSms,
   sendSmsSecondary,
