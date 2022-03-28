@@ -52,6 +52,13 @@ async function scrape() {
     }))
   );
 
+  // Extract the total overall number of jobs
+  const totalJobs = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".job")).map((job) => ({
+      totalJobs: job.getElementsByTagName("h1").length,
+    }))
+  );
+
   // TODO: Refactor using switch
 
   if (specialties) {
