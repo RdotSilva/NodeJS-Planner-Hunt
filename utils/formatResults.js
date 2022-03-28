@@ -66,8 +66,27 @@ const formatCategories = (results) => {
   });
 };
 
-// TODO: Refactor to handle both categories and positions
-const formatWithSeparatingLine = (results, type) => {};
+const formatWithSeparatingLine = (results, type) => {
+  let formatted = "";
+
+  results.forEach((result) => {
+    if (type === "category") {
+      formatted += result.categories;
+    }
+
+    if (type === "position") {
+      formatted += result.position;
+      formatted += "=======";
+    }
+
+    if (type === "county") {
+      formatted += result;
+      formatted += "----";
+    }
+  });
+
+  return formatted;
+};
 
 module.exports = {
   formatResults,
