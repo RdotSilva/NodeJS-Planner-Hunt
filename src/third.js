@@ -21,8 +21,19 @@ async function scrape() {
     elements.map((el) => el.innerText)
   );
 
+  // Extract the phone numbers for reach position
+  const phoneNumbers = await page.evaluate(() =>
+    Array.from(document.querySelectorAll(".call-now")).map((number) => ({
+      numbers: number.getElementsByTagName("p"),
+    }))
+  );
+
   if (totalSearchResults[0] > 0) {
     console.log("Jobs Found".green);
+  }
+
+  if (phoneNumbers) {
+    console.log("Phone numbers have been found".green);
   }
   browser.close();
 }
