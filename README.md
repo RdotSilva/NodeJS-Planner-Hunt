@@ -18,9 +18,15 @@ Technologies/Tools
 
 - [JavaScript](https://www.javascript.com/)
 - [NodeJS](https://nodejs.org/)
+- [VSCode](https://code.visualstudio.com/)
+
+Packages
+
+- [Colors](https://www.npmjs.com/package/colors)
+- [Puppeteer](https://www.npmjs.com/package/puppeteer)
+- [Nodemailer](https://www.npmjs.com/package/nodemailer)
 - [Twilio](https://www.twilio.com/)
 - [NeDB](https://dbdb.io/db/nedb)
-- [VSCode](https://code.visualstudio.com/)
 
 ## Testing
 
@@ -31,12 +37,6 @@ Unit tests are included:
 ```
 npm test
 ```
-
-Packages
-
-- [Colors](https://www.npmjs.com/package/colors)
-- [Puppeteer](https://www.npmjs.com/package/puppeteer)
-- [Nodemailer](https://www.npmjs.com/package/nodemailer)
 
 ## Screenshots
 
