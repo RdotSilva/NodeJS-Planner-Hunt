@@ -21,6 +21,7 @@ const sendEmail = (results) => {
     },
   });
 
+ try {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: `Test User" ${fromEmail}`,
@@ -33,6 +34,9 @@ const sendEmail = (results) => {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
   
   fs.appendFileSync(emailSentOutputPath, new Date());
+ } catch (error) {
+   console.log(error)
+ }
 };
 
 module.exports = {
