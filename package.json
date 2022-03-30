@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RdotSilva/NodeJS-Planner-Hunt#readme",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
     "chai": "^4.3.6",
     "colors": "^1.4.0",
     "dotenv": "^16.0.0",
